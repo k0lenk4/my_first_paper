@@ -15,16 +15,15 @@
 
 .. class:: center
 
-    :Название исследуемой задачи: Мое название работы
-    :Тип научной работы: M1P/НИР/CoIS
-    :Автор: Имя Отчество Фамилия
-    :Научный руководитель: степень, Фамилия Имя Отчество
-    :Научный консультант(при наличии): степень, Фамилия Имя Отчество
+    :Название исследуемой задачи: О синтезе логических корректоров над элементарными классификаторами.
+    :Тип научной работы: M1P
+    :Автор: Елена Николаевна Акопова
+    :Научный руководитель: д.ф.-м.н., доцент кафедры ММП, Дюкова Елена Всеволодна
 
 Abstract
 ========
 
-Purus sit amet luctus venenatis lectus magna fringilla. Condimentum id venenatis a condimentum vitae sapien. Auctor neque vitae tempus quam pellentesque nec nam aliquam. Eget egestas purus viverra accumsan in. Nam aliquam sem et tortor. Donec et odio pellentesque diam volutpat commodo. Odio pellentesque diam volutpat commodo sed egestas. Sit amet dictum sit amet justo. Pellentesque sit amet porttitor eget. Imperdiet sed euismod nisi porta lorem mollis aliquam ut. Quis varius quam quisque id diam vel quam elementum. Ornare lectus sit amet est placerat in. Vulputate dignissim suspendisse in est ante. Elit sed vulputate mi sit amet mauris. Egestas sed tempus urna et pharetra pharetra. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus.
+Исследуется задача логической классификации с дискретными признаками. Предлагается метод ускорения синтеза монотонных логических корректоров, основанных на построении тупиковых корректных наборов элементарных классификаторов (ЭК) ранга 1. Ключевая проблема — вычислительная сложность поиска неприводимых покрытий булевой матрицы LK. Для её решения разработан алгоритм предварительной обработки: из матрицы удаляются охватывающие строки, что позволяет перейти к подматрице с упрощенной структурой и найти в ней неприводимые покрытия, формирующие корректные наборы. Корректность метода обоснована, а эксперименты подтвердили его эффективность, показав прирост скорости построения корректоров.
 
 Research publications
 ===============================
