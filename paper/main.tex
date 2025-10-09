@@ -14,153 +14,177 @@
 \usepackage{natbib}
 \usepackage{doi}
 
+\usepackage[warn]{mathtext}
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{indentfirst}
+\usepackage{csquotes}
+% \usepackage[bibstyle=gost-numeric, sorting=none]{biblatex}
+% \addbibresource{biblio.bib}
+
+\linespread{1.3}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{hyphenat} 
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% page settings
+\usepackage[
+    left=1.5cm,
+    right=1.5cm,
+    top=1.5cm,
+    bottom=1.5cm,
+    bindingoffset=0cm
+]{geometry}
+
+\usepackage{graphicx, hyperref, xcolor}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=teal,
+    filecolor=magenta, 
+    urlcolor=blue,
+    citecolor=olive,
+    pdftitle={GD},
+    % pdfpagemode=FullScreen,
+    linktoc=all
+    }
+
+\usepackage{wrapfig,caption}
+
+% figures
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{floatrow}
+\floatsetup{heightadjust=object}
+
+% math
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools,esint,eucal}
 
 
-\title{A template for the \emph{arxiv} style}
+\def\vec#1{\mathchoice{\mbox{\boldmath$\displaystyle#1$}}
+{\mbox{\boldmath$\textstyle#1$}} {\mbox{\boldmath$\scriptstyle#1$}} {\mbox{\boldmath$\scriptscriptstyle#1$}}}
 
-\author{ David S.~Hippocampus\thanks{Use footnote for providing further
-		information about author (webpage, alternative
-		address)---\emph{not} for acknowledging funding agencies.} \\
-	Department of Computer Science\\
-	Cranberry-Lemon University\\
-	Pittsburgh, PA 15213 \\
+\title{Human pose estimation from video footage.}
+
+
+\author{Neychev R. G.\\
+	Lomonosov Moscow State University\\
+	Faculty of Computational Mathematics and Cybernetics\\
+	Moscow \\
 	\texttt{hippo@cs.cranberry-lemon.edu} \\
-	%% examples of more authors
 	\And
-	Elias D.~Striatum \\
-	Department of Electrical Engineering\\
-	Mount-Sheikh University\\
-	Santa Narimana, Levand \\
-	\texttt{stariate@ee.mount-sheikh.edu} \\
-	%% \AND
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
-	%% \And
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
-	%% \And
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
+	Аkopova Е. N.\\
+	Lomonosov Moscow State University\\
+	Faculty of Computational Mathematics and Cybernetics\\
+	Moscow\\
+	\texttt{s0220010@gse.cs.msu.ru} \\
 }
 \date{}
 
-\renewcommand{\shorttitle}{\textit{arXiv} Template}
+\renewcommand{\shorttitle}{Human pose estimation from video footage.}
 
-%%% Add PDF metadata to help others organize their library
-%%% Once the PDF is generated, you can check the metadata with
-%%% $ pdfinfo template.pdf
 \hypersetup{
-pdftitle={A template for the arxiv style},
-pdfsubject={q-bio.NC, q-bio.QM},
-pdfauthor={David S.~Hippocampus, Elias D.~Striatum},
-pdfkeywords={First keyword, Second keyword, More},
+pdftitle={My first paper Akopova},
+pdfkeywords={Human pose estimation, visual-language understanding},
 }
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-	Исследуется задача логической классификации с дискретными признаками. Предлагается метод ускорения синтеза монотонных логических корректоров, основанных на построении тупиковых корректных наборов элементарных классификаторов (ЭК) ранга 1. Ключевая проблема — вычислительная сложность поиска неприводимых покрытий булевой матрицы LK. Для её решения разработан алгоритм предварительной обработки: из матрицы удаляются охватывающие строки, что позволяет перейти к подматрице с упрощенной структурой и найти в ней неприводимые покрытия, формирующие корректные наборы. Корректность метода обоснована, а эксперименты подтвердили его эффективность, показав прирост скорости построения корректоров.
+
 \end{abstract}
 
-
-\keywords{First keyword \and Second keyword \and More}
+\keywords{human pose estimation \and visual-language understanding }
 
 \section{Introduction}
 
-Задача классификации по прецедентам, или обучения с учителем, является одной из фундаментальных проблем в машинном обучении и анализе данных. Её целью является автоматическое отнесение новых объектов к одному из заранее известных классов на основе анализа конечного набора обучающих данных, для которых классовая принадлежность определена. Эффективные алгоритмы классификации критически важны в таких областях, как медицинская диагностика, прогнозирование редких событий, анализ финансовых рисков и обработка социологической информации, где от точности модели зависят принимаемые решения.
-
-Для решения задач классификации, особенно в условиях недостатка статистических данных, успешно применяются логические (дискретные) методы. Фундамент для этих методов в России был заложен в работах С.В. Яблонского и Ю.И. Журавлева в 70–80-х годах прошлого века. Ранние подходы в рамках этого направления фокусировались на использовании элементарных классификаторов (ЭК) — простых правил вида «признак $x_j$ равен значению $\sigma$». Процесс классификации заключался в построении для каждого класса семейств таких корректных ЭК (не ошибающихся на обучающей выборке) и последующем процедуре голосования этих ЭК за классы для нового объекта.
-
-Однако классические логические подходы сталкиваются с серьезными вычислительными и методическими трудностями. Когда признаки имеют множество допустимых значений, количество корректных ЭК становится чрезвычайно большим, при этом каждый из них может покрывать лишь малую часть прецедентов. Это приводит к двум ключевым проблемам: во-первых, возникают сложности с обеспечением общей корректности алгоритма, а во-вторых, процедура обучения требует решения сложных дискретных задач комбинаторной оптимизации, что вычислительно трудоемко.
-
-Прорывом в преодолении этих ограничений стало развитие методов алгебро-логической коррекции, где корректность обеспечивается не отдельными ЭК, а их наборами. В данной работе предлагается усовершенствованный алгоритм построения таких наборов. Вместо работы с булевой матрицей $L_K$, число столбцов которой экспоненциально зависит от количества признаков, мы предлагаем альтернативный подход. Сначала строится компактная матрица сравнения с линейным числом столбцов, затем из неё удаляются избыточные (охватывающие) строки. На следующем этапе осуществляется переход к расширенной матрице и поиск в ней неприводимых покрытий, каждое из которых образует тупиковый монотонный корректный набор ЭК.
-
-Предложенный метод позволяет значительно снизить вычислительную сложность этапа обучения по сравнению с традиционными подходами. В работе приведено теоретическое обоснование корректности алгоритма, доказывающее, что найденные наборы ЭК действительно обеспечивают безошибочную классификацию на обучающих данных. Проведенные вычислительные эксперименты подтвердили эффективность алгоритма, продемонстрировав его применимость для задач с большим числом признаков. Таким образом, основной вклад работы заключается в разработке более эффективной и масштабируемой процедуры синтеза логических классификаторов, которая решает ключевую проблему вычислительной трудоемкости, сохраняя при этом высокую точность.
-
-\section{Headings: first level}
-\label{sec:headings}
-
-\lipsum[4] See Section \ref{sec:headings}.
-
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-	\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
-
-\subsubsection{Headings: third level}
-\lipsum[6]
-
-\paragraph{Paragraph}
-\lipsum[7]
+\section{Related Work}
 
 
+В работе \textbf{«Deep High-Resolution Representation Learning for Visual Recognition»} предложена принципиально важная архитектура HRNet (High-Resolution Network), которая сохраняет высокое пространственное разрешение признаков на протяжении всей сети. В отличие от традиционных подходов, которые последовательно уменьшают разрешение и затем восстанавливают его, HRNet поддерживает параллельные ветви с разным разрешением и постоянно осуществляет обмен информацией между ними. Это позволяет сохранять мелкие детали, критически важные для точной локализации ключевых точек. Данный подход стал фундаментальным для многих современных методов оценки позы, обеспечивая превосходное качество на таких задачах, как pose estimation и semantic segmentation.
 
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
+Исследование \textbf{«Revisiting Skeleton-based Action Recognition»} предоставляет систематический анализ и сравнение методов распознавания действий на основе скелетных данных. Авторы исследуют различные способы моделирования временных зависимостей и пространственных отношений между суставами, включая методы, основанные на RNN, CNN и GCN (Graph Convolutional Networks). Работа подчеркивает важность эффективного моделирования как пространственной, так и временной динамики для достижения высокой точности в задачах видеоанализа. Эти выводы непосредственно применимы к задаче оценки позы из видео, где необходимо не только точно определить позу в каждом кадре, но и обеспечить временную согласованность предсказаний.
 
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
+В работе \textbf{«Video-LLaVA: Learning United Visual Representation by Alignment Before Projection»} предложена инновационная парадигма для мультимодального обучения. Ключевая идея заключается в выравнивании визуальных представлений из разных модальностей (изображения и видео) в общем пространстве \textit{до} их проекции в языковую модель. Такой подход позволяет создать унифицированное визуально-языковое представление, которое эффективно обобщается на различные задачи. Для видео-задач это означает возможность совместного использования статических и динамических визуальных признаков, что особенно важно для понимания сложных временных последовательностей, таких как человеческие движения.
 
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
+Исследование \textbf{«PoseLLM: Enhancing Language-Guided Human Pose Estimation with MLP Alignment»} демонстрирует возможность использования больших языковых моделей (LLM) для задач оценки позы. Авторы показывают, что даже простой MLP-слой может эффективно выравнивать визуальные признаки с семантическим пространством языковой модели. Это позволяет системе понимать текстовые описания поз и точно локализовать соответствующие ключевые точки на изображениях. Данный подход открывает новые возможности для создания интерактивных систем, способных обрабатывать сложные языковые запросы и выполнять точную пространственную локализацию на основе семантического понимания.
 
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
+Рассмотренные работы демонстрируют эволюцию от специализированных архитектур для визуального распознавания (HRNet) к сложным мультимодальным системам (Video-LLaVA, PoseLLM). Современный тренд направлен на создание универсальных моделей, способных одновременно обрабатывать различные модальности и решать комплексные задачи. Для области оценки позы из видео это означает переход от поточной обработки отдельных кадров к интегрированным подходам, учитывающим временную динамику и семантический контекст. Перспективным направлением является разработка методов, сочетающих преимущества высокоточных визуальных представлений (HRNet), временного моделирования (Revisiting Skeleton-based Action Recognition) и семантического понимания (Video-LLaVA, PoseLLM) в единой архитектуре.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\textwidth]{../figures/log_reg_cs_exp.eps}
-	\caption{Sample figure caption.}
-	\label{fig:fig1}
-\end{figure}
+\section{Постановка задачи}
 
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
+Пусть задана коллекция видеозаписей $
+\mathcal{V} = \{v^i\}_{i=1}^N$, каждая видеозапись $v^i$ может быть представлена как упорядоченная последовательность кадров $
+v^i = [f^i_1, f^i_2, \dots, f^i_{T_i}].
+$
+На каждом кадре $f^i_t$ присутствует один или несколько людей. Кадр может быть сегментирован на отдельные персонализированные фрагменты, каждый из которых содержит одного человека:
+$$
+f^i_t = [p^{i,t}_1 \sqcup p^{i,t}_2 \sqcup \dots \sqcup p^{i,t}_{m_{i,t}}],
+\text{ где $p^{i,t}_k$ — фрагмент, содержащий $k$-го человека в кадре $t$ видео $v^i$}.
+$$
 
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-\begin{center}
-	\url{https://www.ctan.org/pkg/booktabs}
-\end{center}
+Пусть также задана размеченная выборка $
+\mathcal{D} = \left\{ (v^l, PL^l) \right\}_{l=1}^L$,
+где для каждой видеозаписи $v^l$ известен соответствующий список оценённых поз для всех людей во всех кадрах:
+$
+PL^l = \left[ \mathbf{j}^{l,1}_1, \dots, \mathbf{j}^{l,1}_{m_{l,1}}, \ \mathbf{j}^{l,2}_1, \dots, \mathbf{j}^{l,T_l}_{m_{l,T_l}} \right].
+$
+Здесь $\mathbf{j}^{l,t}_k \in \mathbb{R}^{K \times 2}$ — это матрица ключевых точек для $k$-го человека в кадре $t$ видео $v^l$, содержащая их координаты $(x, y)$.
 
-
-\begin{table}
-	\caption{Sample table title}
-	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
-
-\subsection{Lists}
+Модель оценки позы $h$ задаётся как композиция двух функций \textbf{detection} и \textbf{estimation}: $h(v^i) = \mathrm{estimation}(\mathrm{detection}(v^i))$.
 \begin{itemize}
-	\item Lorem ipsum dolor sit amet
-	\item consectetur adipiscing elit.
-	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
+    \item $\mathrm{detection}: (v^i)_{\mathcal{V}} \rightarrow \mathcal{P}^i$ — функция детекции, которая для входного видео $v^i$ возвращает множество всех обнаруженных персонализированных фрагментов $\mathcal{P}^i = \{ p^{i,t}_k \}$ для всех кадров и всех людей.
+    \item $\mathrm{estimation}: (\mathcal{P}^i) \rightarrow \mathcal{J}^i$ — функция оценки, которая для множества фрагментов $\mathcal{P}^i$ возвращает множество предсказанных поз $\mathcal{J}^i = \{ \hat{\mathbf{j}}^{i,t}_k \}$.
 \end{itemize}
 
+Качество модели $h$ оценивается с помощью метрик \textbf{Precision} и \textbf{Recall} для обнаружения людей и \textbf{Average Precision (AP)} для точности оценки позы. Для оценки детекции введём множество всех эталонных (ground truth) фрагментов $PG = \cup_{l=1}^L PL^l$ и множество всех предсказанных фрагментов $PH = \cup_{i=1}^N \mathcal{J}^i$. Тогда:
+\[
+\mathrm{Precision}_{\mathrm{det}} = \frac{|PG \cap PH|}{|PH|}, \quad \mathrm{Recall}_{\mathrm{det}} = \frac{|PG \cap PH|}{|PG|},
+\]
+где пересечение $PG \cap PH$ считается на основе порога по Intersection-over-Union (IoU) между ограничивающими рамками фрагментов. Для оценки точности позы используется показатель \textbf{Average Precision (AP)}, вычисляемый на основе порога по Object Keypoint Similarity (OKS):
+\[
+\mathrm{AP} = \int_0^1 p(r)  dr,
+\]
+
+где $p(r)$ — это precision-recall кривая, построенная с использованием OKS - мера схожести, которая вычисляется по формуле:
+
+\[
+\text{OKS} = \frac{\sum\limits_{i} \exp\left(-d_i^2 / (2s^2\sigma_i^2)\right) \cdot \delta(v_i > 0)}{\sum\limits_{i} \delta(v_i > 0)}
+\]
+
+где:
+\begin{itemize}
+    \item $i$ — индекс ключевой точки (от 1 до $K$)
+    \item $d_i$ — евклидово расстояние между предсказанной и эталонной ключевой точкой $i$
+    \item $s$ — масштабный фактор, вычисляемый как $\sqrt{w \cdot h}$, где $w$ и $h$ — ширина и высота bounding box человека
+    \item $\sigma_i$ — константа, характеризующая нормальную погрешность для ключевой точки $i$ (определяется на основе перцептивной вариативности точки на датасете)
+    \item $v_i$ — флаг видимости ключевой точки в эталонных данных:
+    \begin{itemize}
+        \item $v_i = 0$: точка не размечена
+        \item $v_i = 1$: точка размечена, но не видна (закрыта)
+        \item $v_i = 2$: точка размечена и видна
+    \end{itemize}
+    \item $\delta(v_i > 0)$ — индикаторная функция, равная 1, если $v_i > 0$ (точка размечена), и 0 в противном случае
+\end{itemize}
+Требуется найти модель $h$, максимизирующую совокупную метрику $\mathrm{F1}_{\mathrm{det}}$ для детекции и $\mathrm{AP}$ для оценки позы:
+\[
+\hat{h} = \arg \max_{h \in \mathcal{H}} \left( \alpha \cdot \mathrm{F1}_{\mathrm{det}}(h, \mathcal{D}) + \beta \cdot \mathrm{AP}(h, \mathcal{D}) \right),
+\]
+где $\mathcal{H}$ — заданное семейство моделей, а $\alpha$ и $\beta$ — весовые коэффициенты, определяющие важность каждой из подзадач.
+\[
+\mathrm{F1}_{\mathrm{det}} = \frac{2 \cdot \mathrm{Precision}_{\mathrm{det}} \cdot \mathrm{Recall}_{\mathrm{det}}}{\mathrm{Precision}_{\mathrm{det}} + \mathrm{Recall}_{\mathrm{det}}}
+\]
 
 \bibliographystyle{unsrtnat}
 \bibliography{references}
+
 
 \end{document}
